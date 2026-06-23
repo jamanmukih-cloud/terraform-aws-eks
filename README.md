@@ -1,17 +1,17 @@
 # Terraform AWS EKS Cluster
 
-Production-ready Amazon EKS cluster provisioning with Terraform. Includes VPC, node groups, IAM roles, and cluster autoscaler configuration.
+Production-ready Amazon EKS cluster provisioning with Terraform. Includes VPC, managed node groups, IAM roles, and cluster autoscaler configuration.
 
 ## Architecture
-- **VPC**: Multi-AZ with public/private subnets
-- **EKS**: Managed Kubernetes cluster with Fargate profiles
-- **Node Groups**: Spot and on-demand EC2 instances
-- **Autoscaler**: Cluster autoscaler + HPA integration
+- **VPC**: Multi-AZ with public/private subnets and NAT Gateway
+- **EKS**: Managed Kubernetes cluster with KMS encryption
+- **Node Groups**: Spot + on-demand EC2 instances with auto-scaling
+- **Logging**: CloudWatch audit, controller, and scheduler logs
 
 ## Prerequisites
-- Terraform >= 1.5
-- AWS CLI configured
-- kubectl
+- Terraform >= 1.5.0
+- AWS CLI configured with appropriate credentials
+- kubectl >= 1.28
 
 ## Usage
 ```bash
@@ -21,6 +21,6 @@ terraform apply -var-file="environments/prod.tfvars"
 ```
 
 ## Module Structure
-- `modules/vpc/` - VPC and networking
-- `modules/eks/` - EKS cluster and node groups
-- `modules/iam/` - IAM roles and policies
+- `modules/vpc/` - VPC, subnets, NAT Gateway, route tables
+- `modules/eks/` - EKS cluster, node groups, security groups
+- `modules/iam/` - IAM roles for cluster and node group

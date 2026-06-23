@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 variable "environment" {
-  description = "Environment name (dev, staging, prod)"
+  description = "Environment name"
   type        = string
   default     = "prod"
 }
@@ -41,19 +41,16 @@ variable "node_instance_types" {
 }
 
 variable "node_desired_size" {
-  description = "Desired number of worker nodes"
-  type        = number
-  default     = 3
+  type    = number
+  default = 3
 }
 
 variable "node_min_size" {
-  description = "Minimum number of worker nodes"
-  type        = number
-  default     = 2
+  type    = number
+  default = 2
 }
 
 variable "node_max_size" {
-  description = "Maximum number of worker nodes"
-  type        = number
-  default     = 10
+  type    = number
+  default = 10
 }

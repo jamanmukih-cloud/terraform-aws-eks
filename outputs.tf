@@ -3,12 +3,6 @@ output "cluster_endpoint" {
   value       = module.eks.cluster_endpoint
 }
 
-output "cluster_certificate_authority" {
-  description = "Cluster CA certificate"
-  value       = module.eks.cluster_certificate_authority
-  sensitive   = true
-}
-
 output "cluster_name" {
   description = "EKS cluster name"
   value       = module.eks.cluster_name
@@ -19,7 +13,7 @@ output "vpc_id" {
   value       = module.vpc.vpc_id
 }
 
-output "private_subnet_ids" {
-  description = "Private subnet IDs"
-  value       = module.vpc.private_subnet_ids
+output "kubeconfig_command" {
+  description = "Command to update kubeconfig"
+  value       = "aws eks update-kubeconfig --name ${module.eks.cluster_name} --region ${var.aws_region}"
 }
