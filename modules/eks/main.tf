@@ -7,14 +7,9 @@ resource "aws_eks_cluster" "main" {
     subnet_ids              = var.private_subnet_ids
     endpoint_private_access = true
     endpoint_public_access  = true
-    security_group_ids      = [aws_security_group.cluster.id]
   }
 
-  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
-
-  tags = {
-    Environment = var.environment
-  }
+  enabled_cluster_log_types = ["api", "audit", "authenticator"]
 }
 
 resource "aws_eks_node_group" "main" {
@@ -29,10 +24,4 @@ resource "aws_eks_node_group" "main" {
     min_size     = var.node_min_size
     max_size     = var.node_max_size
   }
-
-  update_config {
-    max_unavailable = 1
-  }
-
-  labels = { role = "worker" }
 }
